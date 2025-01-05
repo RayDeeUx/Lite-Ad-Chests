@@ -1,0 +1,26 @@
+{
+	"geode": "4.0.1",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "colon.lite_ad_chests",
+	"name": "Lite Ad Chests",
+	"version": "v1.0.0",
+	"developer": "Colon",
+	"description": "Ports the ad chests from GD Lite",
+	"links": {
+		"source": "https://github.com/GDColon/Lite-Ad-Chests"
+	},
+	"tags": ["enhancement"],
+	"settings": {
+		"hideWhenDone": {
+            "name": "Hide when all icons obtained",
+            "description": "Removes the ad chest button once you've opened all 10 chests\n\n<cl>(you can also just uninstall the mod)</c>",
+            "type": "bool",
+			"default": false
+        }
+	}
+}
