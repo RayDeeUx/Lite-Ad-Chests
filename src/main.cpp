@@ -1,4 +1,3 @@
-#include <Geode/Geode.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
 #include <Geode/modify/RewardsPage.hpp>
 
@@ -6,7 +5,7 @@ using namespace geode::prelude;
 
 std::string getNextAdChest() {
 	for (int i = 12; i <= 21; ++i) {
-		std::string chestID = "00" + std::to_string(i);
+		std::string chestID = fmt::format("00{}", i);
 		if (!GameStatsManager::get()->isSpecialChestUnlocked(chestID)) return chestID;
 	}
 	return "";
@@ -18,10 +17,7 @@ class $modify(RewardsPageButAds, RewardsPage) {
 		FMODAudioEngine::get()->playEffect("chestClick.ogg");
 		auto nextChest = getNextAdChest();
 
-		if (nextChest == "") {
-			noMoreChests();
-			return;
-		}
+		if (nextChest == "") return noMoreChests();
 
 		GJRewardItem* adReward = GameStatsManager::get()->unlockSpecialChest(nextChest);
 
@@ -89,7 +85,11 @@ class $modify(RewardsPageButAds, RewardsPage) {
 		DialogLayer* dialog = DialogLayer::createWithObjects(dialogLines, 2);
 		dialog->updateChatPlacement(DialogChatPlacement::Center);
 		dialog->animateInRandomSide();
+		#ifndef GEODE_IS_INTEL_MAC
 		dialog->addToMainScene();
+		#else
+		CCScene::get()->addChild(dialog); // this is absolutely incorrect i think
+		#endif
 	}
 };
 
@@ -147,7 +147,11 @@ class $modify(GarageButSupporter, GJGarageLayer) {
 			dialog->m_delegate = m_fields.self();
 
 			dialog->animateInRandomSide();
+			#ifndef GEODE_IS_INTEL_MAC
 			dialog->addToMainScene();
+			#else
+			CCScene::get()->addChild(dialog); // this is absolutely incorrect i think
+			#endif
 			return;
 		}
 
