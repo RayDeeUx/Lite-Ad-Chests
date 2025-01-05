@@ -50,7 +50,7 @@ class $modify(RewardsPageButAds, RewardsPage) {
 		m_buttonMenu->addChild(adButton);
 
 		if (allChests) {
-			adSprite->setColor(ccColor3B(200, 200, 200));
+			adSprite->setColor(ccColor3B({200, 200, 200}));
 			return true;
 		}
 
